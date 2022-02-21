@@ -1,4 +1,5 @@
 import json
+import yaml
 
 
 def JSON_ENCODE(key, value):
@@ -25,6 +26,29 @@ def generate_diff(filepath1, filepath2):
 
     for key, value in json2.items():
         if key not in json1:
+            result_str = result_str + '  {} {}'.format('+', JSON_ENCODE(key, value)) + '\n'
+    
+    return result_str + '}'
+
+
+def generate_diff_yaml(filepath1, filepath2):
+    yaml1 = yaml.load(open(filepath1))
+    yaml2 = yaml.load(open(filepath2))
+
+    result_str = '{\n'
+
+    for key, value in yaml1.items():
+        if key in yaml2:
+            if yaml1[key] == yaml2[key]:
+                result_str = result_str + '  {} {}'.format(' ', JSON_ENCODE(key, value)) + '\n'
+            else:
+                result_str = result_str + '  {} {}'.format('-', JSON_ENCODE(key, value)) + '\n'
+                result_str = result_str + '  {} {}'.format('+', JSON_ENCODE(key, yaml2[key])) + '\n'
+        else:
+            result_str = result_str + '  {} {}'.format('-', JSON_ENCODE(key, value)) + '\n'
+
+    for key, value in yaml2.items():
+        if key not in yaml1:
             result_str = result_str + '  {} {}'.format('+', JSON_ENCODE(key, value)) + '\n'
     
     return result_str + '}'
