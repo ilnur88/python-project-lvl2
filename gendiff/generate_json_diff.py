@@ -1,4 +1,3 @@
-from gendiff.consts import FIRST_VAL, SECOND_VAL, EVEN_VAL, MINUS_VAL, PLUS_VAL
 import json
 
 
