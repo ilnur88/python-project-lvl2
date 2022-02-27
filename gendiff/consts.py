@@ -1,0 +1,5 @@
+FIRST_VAL = 'first_val'
+SECOND_VAL = 'second_val'
+EVEN_VAL = 'even_val'
+MINUS_VAL = 'minus_val'
+PLUS_VAL = 'plus_val'

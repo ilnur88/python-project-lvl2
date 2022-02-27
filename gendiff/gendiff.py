@@ -1,19 +1,9 @@
 import json
 import yaml
+from gendiff.generate_tree_diff import generate_tree_diff_from_structire
+from gendiff.generate_plain_diff import generate_plain_diff_from_structire
+from gendiff.consts import FIRST_VAL, SECOND_VAL, EVEN_VAL, MINUS_VAL, PLUS_VAL
 
-FIRST_VAL = 'first_val'
-SECOND_VAL = 'second_val'
-EVEN_VAL = 'even_val'
-MINUS_VAL = 'minus_val'
-PLUS_VAL = 'plus_val'
-
-
-def encode_value(value):
-    if type(value) == bool:
-        return str(value).lower()
-    if value is None:
-        return 'null'
-    return str(value)
 
 def transform_to_temp_dict(temp_dict, input_dict, value):    
     for key, val in input_dict.items():
@@ -91,46 +81,7 @@ def generate_diff_structure(dict1, dict2):
     temp_dict1 = from_temp_dict_generate_diff(temp_dict)
     return temp_dict1
 
-def generate_string_from_structire(str_dict):
-    def walk(element, depth):
-        return_str = ''
-        for (k, v) in sorted(element.items(), key = lambda x : x[0]):
-            prefix = ' ' * (depth - 1) * 4
-            if 'children' in v:
-                if EVEN_VAL in v:
-                    diff_prefix = '  {} '.format(' ')
-                    return_str = return_str + '\n' + prefix + diff_prefix + k + ': {' + walk(v['children'], depth + 1) + '\n' + ' ' * depth * 4 + '}'
-                if MINUS_VAL in v and v[MINUS_VAL] == '+':
-                    diff_prefix = '  {} '.format('-')
-                    return_str = return_str + '\n' + prefix + diff_prefix + k + ': {' + walk(v['children'], depth + 1) + '\n' + ' ' * depth * 4 + '}'
-                if MINUS_VAL in v and v[MINUS_VAL] != '+':
-                    diff_prefix = '  {} '.format('-')
-                    return_str = return_str + '\n' + prefix + diff_prefix + k + ': ' + v[MINUS_VAL]
-                if PLUS_VAL in v and v[PLUS_VAL] == '+':
-                    diff_prefix = '  {} '.format('+')
-                    return_str = return_str + '\n' + prefix + diff_prefix + k + ': {' + walk(v['children'], depth + 1) + '\n' + ' ' * depth * 4 + '}'
-                if PLUS_VAL in v and v[PLUS_VAL] != '+':
-                    diff_prefix = '  {} '.format('+')
-                    return_str = return_str + '\n' + prefix + diff_prefix + k + ': ' + v[PLUS_VAL]
-            else:
-                diff_prefix = ''
-                if EVEN_VAL in v:
-                    diff_prefix = '  {} '.format(' ')
-                    output = encode_value(v[EVEN_VAL])
-                    return_str = return_str + '\n' + prefix + diff_prefix + k + ': ' + output
-                if MINUS_VAL in v:
-                    diff_prefix = '  {} '.format('-')
-                    output = encode_value(v[MINUS_VAL])
-                    return_str = return_str + '\n' + prefix + diff_prefix + k + ': ' + output
-                if PLUS_VAL in v:
-                    diff_prefix = '  {} '.format('+')
-                    output = encode_value(v[PLUS_VAL])
-                    return_str = return_str + '\n' + prefix + diff_prefix + k + ': ' + output                
-        return return_str              
-
-    return '{' + walk(str_dict, 1) + '\n}'
-
-def generate_diff(filepath1, filepath2):
+def generate_diff(filepath1, filepath2, format_name = ''):
     if filepath1.endswith('.json'):
         file1_dict = json.load(open(filepath1))
     if filepath1.endswith('.yaml') or filepath1.endswith('.yml'):
@@ -142,7 +93,7 @@ def generate_diff(filepath1, filepath2):
         file2_dict = yaml.load(open(filepath2))
 
     diff = generate_diff_structure(file1_dict, file2_dict)
-    #return diff
-
-    return generate_string_from_structire(diff)
-    print( generate_string_from_structire(diff))
+    
+    if format_name.lower() == 'plain':
+        return generate_plain_diff_from_structire(diff)
+    return generate_tree_diff_from_structire(diff)
