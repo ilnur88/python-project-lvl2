@@ -106,7 +106,6 @@ def generate_diff(filepath1, filepath2, format_name=''):
 
     if format_name is None:
         return generate_tree_diff_from_structire(diff)
-        
 
     if format_name.lower() == 'plain':
         return generate_plain_diff_from_structire(diff)

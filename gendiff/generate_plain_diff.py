@@ -9,7 +9,7 @@ def encode_value(value, value_str):
     if value[value_str] is None:
         return 'null'
     if type(value[value_str]) in {int, float}:
-            return 'null'
+        return str(value[value_str])
     return '\'' + str(value[value_str]) + '\''
 
 
