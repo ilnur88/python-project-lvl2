@@ -1,6 +1,7 @@
 import argparse
 from gendiff import generate_diff
 
+
 def main():
     parser = argparse.ArgumentParser(description='Generate diff')
     parser.add_argument('first_file', metavar='first_file', type=str)
@@ -10,7 +11,9 @@ def main():
     print(generate_diff(
         vars(args)['first_file'],
         vars(args)['second_file'],
-    vars(args)['format']))
+        vars(args)['format'])
+        )
+
 
 if __name__ == '__main__':
     main()
