@@ -29,7 +29,7 @@ def generate_plain_diff_from_structire(str_dict):
                         get_path(path, k),
                         encode_value(v, MINUS_VAL),
                         encode_value(v, PLUS_VAL)
-                        ) + '\n'
+                    ) + '\n'
             else:
                 if MINUS_VAL in v:
                     return_str += 'Property \'{}\' was removed'.\
@@ -39,7 +39,7 @@ def generate_plain_diff_from_structire(str_dict):
                         format(
                             get_path(path, k),
                             encode_value(v, PLUS_VAL)
-                            ) + '\n'
+                        ) + '\n'
         return return_str
 
     return walk(str_dict, '').rstrip('\n')
