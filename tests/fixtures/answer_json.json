@@ -1,0 +1,109 @@
+{
+    "common": {
+        "even_val": "+",
+        "children": {
+            "setting1": {
+                "even_val": "Value 1"
+            },
+            "setting2": {
+                "minus_val": 200
+            },
+            "setting3": {
+                "minus_val": true,
+                "plus_val": null
+            },
+            "setting6": {
+                "even_val": "+",
+                "children": {
+                    "key": {
+                        "even_val": "value"
+                    },
+                    "doge": {
+                        "even_val": "+",
+                        "children": {
+                            "wow": {
+                                "minus_val": "",
+                                "plus_val": "so much"
+                            }
+                        }
+                    },
+                    "ops": {
+                        "plus_val": "vops"
+                    }
+                }
+            },
+            "follow": {
+                "plus_val": false
+            },
+            "setting4": {
+                "plus_val": "blah blah"
+            },
+            "setting5": {
+                "plus_val": "+",
+                "children": {
+                    "key5": {
+                        "even_val": "value5"
+                    }
+                }
+            }
+        }
+    },
+    "group1": {
+        "even_val": "+",
+        "children": {
+            "baz": {
+                "minus_val": "bas",
+                "plus_val": "bars"
+            },
+            "foo": {
+                "even_val": "bar"
+            },
+            "nest": {
+                "plus_val": "str",
+                "minus_val": "+",
+                "children": {
+                    "key": {
+                        "even_val": "value"
+                    }
+                }
+            }
+        }
+    },
+    "group2": {
+        "minus_val": "+",
+        "children": {
+            "abc": {
+                "even_val": 12345
+            },
+            "deep": {
+                "even_val": "+",
+                "children": {
+                    "id": {
+                        "even_val": 45
+                    }
+                }
+            }
+        }
+    },
+    "group3": {
+        "plus_val": "+",
+        "children": {
+            "deep": {
+                "even_val": "+",
+                "children": {
+                    "id": {
+                        "even_val": "+",
+                        "children": {
+                            "number": {
+                                "even_val": 45
+                            }
+                        }
+                    }
+                }
+            },
+            "fee": {
+                "even_val": 100500
+            }
+        }
+    }
+}

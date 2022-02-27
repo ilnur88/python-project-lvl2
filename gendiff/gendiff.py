@@ -2,6 +2,7 @@ import json
 import yaml
 from gendiff.generate_tree_diff import generate_tree_diff_from_structire
 from gendiff.generate_plain_diff import generate_plain_diff_from_structire
+from gendiff.generate_json_diff import generate_json_diff_from_structire
 from gendiff.consts import FIRST_VAL, SECOND_VAL, EVEN_VAL, MINUS_VAL, PLUS_VAL
 
 
@@ -96,4 +97,6 @@ def generate_diff(filepath1, filepath2, format_name = ''):
     
     if format_name.lower() == 'plain':
         return generate_plain_diff_from_structire(diff)
+    if format_name.lower() == 'json':
+        return generate_json_diff_from_structire(diff)
     return generate_tree_diff_from_structire(diff)
