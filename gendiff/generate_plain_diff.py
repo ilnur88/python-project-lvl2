@@ -8,8 +8,8 @@ def encode_value(value, value_str):
         return str(value[value_str]).lower()
     if value[value_str] is None:
         return 'null'
-    if value[value_str] is dict:
-        return '+'
+    if type(value[value_str]) in {int, float}:
+            return 'null'
     return '\'' + str(value[value_str]) + '\''
 
 
