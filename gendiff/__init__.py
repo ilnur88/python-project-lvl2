@@ -104,10 +104,12 @@ def generate_diff(filepath1, filepath2, format_name=''):
 
     diff = generate_diff_structure(file1_dict, file2_dict)
 
-    if format_name is None or format_name == '':
+    if format_name is None:
         return generate_tree_diff_from_structire(diff)
+        
 
     if format_name.lower() == 'plain':
         return generate_plain_diff_from_structire(diff)
     if format_name.lower() == 'json':
         return generate_json_diff_from_structire(diff)
+    return generate_tree_diff_from_structire(diff)
