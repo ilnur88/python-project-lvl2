@@ -28,7 +28,7 @@ def generate_tree_diff_from_structire(str_dict):
                 if MINUS_VAL in v and v[MINUS_VAL] != '+':
                     diff_prefix = '  {} '.format('-')
                     return_str += '\n' + prefix + diff_prefix + k
-                    return_str += ': ' + v[MINUS_VAL]
+                    return_str += ': ' + encode_value(v[MINUS_VAL])
                 if PLUS_VAL in v and v[PLUS_VAL] == '+':
                     diff_prefix = '  {} '.format('+')
                     return_str += '\n' + prefix + diff_prefix + k
@@ -37,7 +37,7 @@ def generate_tree_diff_from_structire(str_dict):
                 if PLUS_VAL in v and v[PLUS_VAL] != '+':
                     diff_prefix = '  {} '.format('+')
                     return_str += '\n' + prefix + diff_prefix + k
-                    return_str += ': ' + v[PLUS_VAL]
+                    return_str += ': ' + encode_value(v[PLUS_VAL])
             else:
                 diff_prefix = ''
                 if EVEN_VAL in v:
