@@ -95,7 +95,7 @@ def generate_diff(filepath1, filepath2, format_name=''):
     if filepath1.endswith('.json'):
         file1_dict = json.load(open(filepath1))
     if filepath1.endswith('.yaml') or filepath1.endswith('.yml'):
-        file2_dict = yaml.safe_load(open(filepath1))
+        file1_dict = yaml.safe_load(open(filepath1))
 
     if filepath2.endswith('.json'):
         file2_dict = json.load(open(filepath2))
